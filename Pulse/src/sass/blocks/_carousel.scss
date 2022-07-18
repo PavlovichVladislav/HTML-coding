@@ -1,0 +1,27 @@
+.carousel {
+    padding: 81px 0;
+    &__inner {
+        position: relative;
+        width: 750px;
+        height: 580px;
+        margin: 0 auto;
+    }
+    &__arrow-right {
+        position: absolute;
+        right: -70px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url('../../img/carousel/arrow-right.png');
+        width: 30px;
+        height: 50px;
+    }
+    &__arrow-left {
+        position: absolute;
+        left: -70px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url('../../img/carousel/arrow-left.png');
+        width: 30px;
+        height: 50px;
+    }
+}

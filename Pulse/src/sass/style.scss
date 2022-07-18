@@ -1,9 +1,18 @@
 @import 'base/variables';
 @import 'blocks/buttons';
+@import 'blocks/titles';
+@import 'blocks/forms';
 
 @import 'blocks/main';
 @import 'blocks/header';
 @import 'blocks/advantages';
+@import 'blocks/consultation';
+@import 'blocks/carousel';
+@import 'blocks/catalog';
+@import 'blocks/pulse-card';
+@import 'blocks/reviews';
+@import 'blocks/footer';
+@import 'blocks/modal';
 
 *{
     font-family: 'Museo Sans Cyrl', sans-serif;

@@ -11,11 +11,19 @@
     text-align: center;
     text-transform: uppercase;
     color: #FFFFFF;
+    cursor: pointer;
     &_big {
         width: 300px;
         height: 50px;
         font-size: 16px;
         line-height: 25px;
+    }
+    &_small {
+        width: 135px;
+        height: 44px;
+
+        font-size: 14px;
+        line-height: 22px;
     }
     &_main {
         margin-top: 67px;

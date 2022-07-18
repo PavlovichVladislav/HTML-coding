@@ -1,0 +1,50 @@
+.catalog {
+    min-height: 1182px;
+    padding-bottom: 79px;
+    &__tabs {
+        margin: 0 auto;
+        margin-top: 48px;
+        width: 688px;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__tab {
+        width: 222px;
+        height: 52px;
+        background: rgba(0, 0, 0, 0.0001);
+        border: 2px solid #D0D0D0;
+        transform: skew(-30deg, 0);
+
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 52px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #6B6B6B;
+        cursor: pointer;
+        transition: 0.5s all;
+        &:hover {
+            box-shadow: 3px 3px 20px $main-color;
+        }
+        div {
+            transform: skew(30deg, 0);
+        }
+        &_active {
+            background: #C70101;
+            border: none;
+
+            color: #FFFFFF;
+        }
+    }
+    &__items {
+        margin: 0 auto;
+        margin-top: 38px;
+        width: 944px;
+        display: none;
+        // justify-content: space-between;
+        flex-wrap: wrap;
+        &_active {
+            display: flex;
+        }
+    }
+}
