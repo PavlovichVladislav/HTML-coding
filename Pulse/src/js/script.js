@@ -32,7 +32,7 @@ prevSlide = () => {
 arrowRight.addEventListener('click', nextSlide);
 arrowLeft.addEventListener('click', prevSlide);
 
-// Modal
+// -------------Modal-------------
 
 const modalTrigger = document.querySelectorAll('[data-modal=constulation]');
 
@@ -109,29 +109,27 @@ buyBtn.forEach(btn => {
     })
 })
 
-// tabs 
+// -------------tabs-------------
 
-const tabs = document.querySelectorAll('.catalog__tab');
+const tabsWrapper = document.querySelector('.catalog__tabs');
 
-tabs.forEach(tab => {
-    tab.addEventListener('click', (e) => {
-        let attribute;
+tabsWrapper.addEventListener('click', (e) => {
+    if (e.target && e.target.closest('.catalog__tab')){
+        const tab = e.target.tagName !== 'SPAN' ? e.target.parentElement : e.target;
 
-        tabs.forEach(tab => tab.classList.remove('catalog__tab_active'));
-        if (e.target.tagName === 'DIV'){
-            e.target.parentElement.classList.add('catalog__tab_active');
-            attribute = e.target.parentElement.getAttribute('data-trigger');
-        } else {
-            e.target.classList.add('catalog__tab_active');
-            attribute = e.target.getAttribute('data-trigger');
+        for (item of tabsWrapper.children) {
+            item.classList.remove('catalog__tab_active');
         }
+
+        tab.classList.add('catalog__tab_active');
+        const attribute = tab.getAttribute('data-trigger');
 
         document.querySelectorAll('.catalog__items').forEach(item => item.style.display = 'none');
         document.querySelector(`[data-modal=${attribute}]`).style.display = 'flex';
-    })
+    }
 })
 
-// card info 
+// -------------card info------------- 
 
 const catalogWrappers = document.querySelectorAll('.catalog__items');
 
