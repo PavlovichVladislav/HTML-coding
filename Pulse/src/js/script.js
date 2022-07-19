@@ -133,22 +133,6 @@ tabs.forEach(tab => {
 
 // card info 
 
-// const cards = document.querySelectorAll('.pulse-card');
-// cards.forEach(card => {
-//     card.addEventListener('click', (e) => {
-//         if (e.target.classList.contains('pulse-card__link')){
-//             e.preventDefault();
-//             if (e.target.classList.contains('pulse-card__link_back')) {
-//                 e.target.parentElement.classList.toggle('pulse-card__list_active');
-//                 e.target.parentElement.previousElementSibling.classList.toggle('pulse-card__content_active');
-//             } else {
-//                 e.target.parentElement.classList.toggle('pulse-card__content_active');
-//                 e.target.parentElement.nextElementSibling.classList.toggle('pulse-card__list_active');
-//             }
-//         }
-//     })
-// })
-
 const catalogWrappers = document.querySelectorAll('.catalog__items');
 
 catalogWrappers.forEach(wrapper => {
