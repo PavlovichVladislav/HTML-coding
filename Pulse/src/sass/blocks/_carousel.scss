@@ -1,10 +1,17 @@
 .carousel {
     padding: 81px 0;
-    &__inner {
+    &__body {
         position: relative;
         width: 750px;
         height: 580px;
         margin: 0 auto;
+    }
+    &__inner {
+        // position: relative;
+        // width: 750px;
+        // height: 580px;
+        // margin: 0 auto;
+        overflow: hidden;
     }
     &__arrow-right {
         position: absolute;
@@ -14,6 +21,7 @@
         background: url('../../img/carousel/arrow-right.png');
         width: 30px;
         height: 50px;
+        cursor: pointer;
     }
     &__arrow-left {
         position: absolute;
@@ -23,5 +31,10 @@
         background: url('../../img/carousel/arrow-left.png');
         width: 30px;
         height: 50px;
+        cursor: pointer;
+    }
+    &__wrapper {
+        transition: 0.5s all;
+        display: flex;
     }
 }

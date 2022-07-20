@@ -1,33 +1,29 @@
-const slider = document.querySelector('.carousel__inner');
+// -------------Slider-------------
+const slider = document.querySelector('.carousel__wrapper');
 const slides = document.querySelectorAll('.carousel__item');
 const arrowRight = document.querySelector('.carousel__arrow-right');
 const arrowLeft = document.querySelector('.carousel__arrow-left');
 
-slides.forEach(slide => {
-    slide.style = "display: none";
-})
-
-slides[0].style = "display: block";
-
 let currentSlide = 0;
 
-nextSlide = () => {
-    slides[currentSlide].style = "display: none";
-   
-    currentSlide += 1;
-    if (currentSlide > slides.length -1 ) currentSlide = 0;
+function nextSlide(){
+    if (currentSlide === slides.length-1) {
+        arrowRight.style.display = 'none';
+    } else {
+        slider.style.transform = `translateX(${-100*(currentSlide+1)}%)`;
+        currentSlide++;
+        arrowLeft.style.display = 'block';
+    }    
+}
 
-    slides[currentSlide].style = "display: block";    
-} 
-
-prevSlide = () => {
-    slides[currentSlide].style = "display: none";
-   
-    currentSlide -= 1;
-    if (currentSlide < 0) currentSlide = slides.length - 1;
-
-    slides[currentSlide].style = "display: block";    
-} 
+function prevSlide(){
+    if (currentSlide === 0) {
+        arrowLeft.style.display = 'none';
+    } else {
+        slider.style.transform = `translateX(${-100*(--currentSlide)}%)`;
+        arrowRight.style.display = 'block';
+    }
+}
 
 arrowRight.addEventListener('click', nextSlide);
 arrowLeft.addEventListener('click', prevSlide);
