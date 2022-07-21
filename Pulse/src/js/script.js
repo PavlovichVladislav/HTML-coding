@@ -5,24 +5,25 @@ const arrowRight = document.querySelector('.carousel__arrow-right');
 const arrowLeft = document.querySelector('.carousel__arrow-left');
 
 let currentSlide = 0;
+arrowLeft.style.display = 'none';
 
 function nextSlide(){
-    if (currentSlide === slides.length-1) {
+    if (currentSlide + 1 === slides.length-1) {
         arrowRight.style.display = 'none';
-    } else {
-        slider.style.transform = `translateX(${-100*(currentSlide+1)}%)`;
-        currentSlide++;
-        arrowLeft.style.display = 'block';
-    }    
+    } 
+
+    slider.style.transform = `translateX(${-100*(currentSlide+1)}%)`;
+    currentSlide++;
+    arrowLeft.style.display = 'block'; 
 }
 
 function prevSlide(){
-    if (currentSlide === 0) {
+    if (currentSlide - 1 === 0) {
         arrowLeft.style.display = 'none';
-    } else {
-        slider.style.transform = `translateX(${-100*(--currentSlide)}%)`;
-        arrowRight.style.display = 'block';
-    }
+    } 
+
+    slider.style.transform = `translateX(${-100*(--currentSlide)}%)`;
+    arrowRight.style.display = 'block';
 }
 
 arrowRight.addEventListener('click', nextSlide);
@@ -84,20 +85,6 @@ document.addEventListener('keyup', (e) => {
     }
 })
 
-// thanks window
-orderBtn.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        closeModal(e.target.parentElement.parentElement);
-        openModal(modalThanks);
-
-        setTimeout (() => {
-            closeModal(modalThanks);
-        }, 3000)
-    })
-});
-
 buyBtn.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -140,4 +127,53 @@ catalogWrappers.forEach(wrapper => {
     })
 })
 
+// -------------http request-------------
+
+forms = document.querySelectorAll('form');
+
+const postData = async (url, data) => {
+    const res = await fetch(url, {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Content-type': 'application/json'
+        }
+    });
+
+    if (!res.ok) {
+        throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+    }
+
+    return await res.json();
+}
+
+forms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+        postData('http://localhost:3000/requests', json)
+            .then(() => {
+                closeModal(e.target.parentElement);
+                openModal(modalThanks);
+
+                setTimeout (() => {
+                    closeModal(modalThanks);
+                }, 3000)        
+            })
+            .catch(() => {
+                closeModal(e.target.parentElement);
+                openModal(document.querySelector('#error'));
+
+                setTimeout (() => {
+                    closeModal(document.querySelector('#error'));
+                }, 3000)
+            })
+            .finally(() => {
+                form.reset();
+            })
+    })
+})
 
