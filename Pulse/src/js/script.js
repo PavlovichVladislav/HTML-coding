@@ -177,3 +177,33 @@ forms.forEach(form => {
     })
 })
 
+// -------------page up-------------
+
+const pageup = document.querySelector('.pageup');
+const scrollSpeed = 10;
+let scrollTimerId = null;
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > document.documentElement.clientHeight && !scrollTimerId) {
+        pageup.style.display = 'block';
+    } 
+})
+
+window.addEventListener('wheel', () => {
+    clearInterval(scrollTimerId);
+    scrollTimerId = null;
+})
+
+pageup.addEventListener('click', () => { 
+    pageup.style.display = 'none';
+
+    scrollTimerId = setInterval(() => {
+        window.scrollTo(0,window.pageYOffset - scrollSpeed);
+        
+        if (window.pageYOffset === 0) {
+            clearInterval(scrollTimerId);
+            scrollTimerId = null;
+        }
+    }, 4);
+})
+
