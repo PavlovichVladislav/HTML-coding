@@ -180,30 +180,36 @@ forms.forEach(form => {
 // -------------page up-------------
 
 const pageup = document.querySelector('.pageup');
-const scrollSpeed = 10;
-let scrollTimerId = null;
+const scrollSpeed = 20;
+let animationId = null;
 
 window.addEventListener('scroll', () => {
-    if (window.pageYOffset > document.documentElement.clientHeight && !scrollTimerId) {
-        pageup.style.display = 'block';
-    } 
+    if (window.pageYOffset > document.documentElement.clientHeight && !animationId) {
+        pageup.classList.add('show');
+        pageup.classList.remove('hide');
+    } else {
+        pageup.classList.add('hide');
+        pageup.classList.remove('show');
+    }
 })
 
 window.addEventListener('wheel', () => {
-    clearInterval(scrollTimerId);
-    scrollTimerId = null;
+    cancelAnimationFrame(animationId);
+    animationId = null;
 })
 
-pageup.addEventListener('click', () => { 
-    pageup.style.display = 'none';
+function smoothScroll() {
+    window.scrollTo(0,window.pageYOffset - scrollSpeed);
 
-    scrollTimerId = setInterval(() => {
-        window.scrollTo(0,window.pageYOffset - scrollSpeed);
-        
-        if (window.pageYOffset === 0) {
-            clearInterval(scrollTimerId);
-            scrollTimerId = null;
-        }
-    }, 4);
+    if (window.pageYOffset > 0) {
+        animationId = requestAnimationFrame(smoothScroll);
+    } 
+}
+
+pageup.addEventListener('click', () => { 
+    pageup.classList.add('hide');
+    pageup.classList.remove('show');
+    
+    animationId = requestAnimationFrame(smoothScroll);     
 })
 
